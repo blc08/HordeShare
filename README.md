@@ -9,7 +9,7 @@ Selected Project Task: **Torrent oldal**
 -   **Login Password:**  `testpw`
     
 
-<u>Note:</u>  After logging into the application, if the panel not switching to legged in view a manual refresh (<kbd>F5</kbd>) is required.
+<u>Note:</u>  After logging into the application, if the panel not switching to logged in view a manual refresh (<kbd>F5</kbd>) is required.
 
 ## **Technical Information**
 
