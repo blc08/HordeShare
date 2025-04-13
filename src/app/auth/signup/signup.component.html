@@ -1,1 +1,80 @@
-<p>signup works!</p>
+<!-- signup.component.html -->
+<div class="signup-container mat-elevation-z8">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Create Account</mat-card-title>
+      <mat-card-subtitle>Please fill in your details to get started</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="John">
+            <mat-error *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+              {{ getErrorMessage('firstName') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Doe">
+            <mat-error *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
+              {{ getErrorMessage('lastName') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" placeholder="example@domain.com" type="email">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+            {{ getErrorMessage('email') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-hint align="start">Min 8 characters, including uppercase, lowercase, number and special character</mat-hint>
+          <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+            {{ getErrorMessage('password') }}
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="confirmPassword" [type]="hidePassword ? 'password' : 'text'">
+          <mat-error *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
+            {{ getErrorMessage('confirmPassword') }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="terms-checkbox">
+          <mat-checkbox formControlName="terms" color="primary">
+            I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
+          </mat-checkbox>
+          <mat-error *ngIf="signupForm.get('terms')?.invalid && signupForm.get('terms')?.touched">
+            You must accept the terms to continue
+          </mat-error>
+        </div>
+
+        <div class="form-actions">
+          <button mat-flat-button color="primary" type="submit" [disabled]="isLoading" class="full-width">
+            <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
+            <span *ngIf="!isLoading">Sign Up</span>
+          </button>
+        </div>
+
+        <div class="login-link">
+          Already have an account? <a routerLink="/login">Log in</a>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
