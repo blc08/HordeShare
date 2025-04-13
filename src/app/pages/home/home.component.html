@@ -1,0 +1,13 @@
+<div class="hero-container">
+  <div class="hero-content">
+    <h1>Welcome to HordeShare!</h1>
+    <p>Find Your Favourite Content</p>
+    <div class="button-group">
+      <button mat-flat-button color="primary" [routerLink]="['/torrents']">Browse Torrents</button>
+      
+      <button *ngIf="!isLoggedIn" mat-flat-button color="accent" [routerLink]="['/login']">Login</button>
+      
+      <button *ngIf="isLoggedIn" mat-flat-button color="accent" [routerLink]="['/profile']">My Profile</button>
+    </div>
+  </div>
+</div>

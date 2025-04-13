@@ -1,0 +1,49 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    background-color: #f5f5f5; /* Optional background color for contrast */
+  }
+  
+  .profile-card {
+    max-width: 600px;
+    width: 100%; /* Ensures responsiveness */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .nametag{
+    align-items: center;
+  }
+  .nametitle{
+    align-items: center;
+    padding: 10px;
+  }
+  .profile-avatar {
+    background-color: #3f51b5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profile-pic {
+    color: white;
+  }
+  
+  .profile-title {
+    font-weight: bold;
+  }
+  
+  .profile-item {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  mat-divider {
+    margin: 16px 0;
+  }
+
+  button{
+    margin: 10px;
+  }
+  

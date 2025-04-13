@@ -1,0 +1,45 @@
+<mat-card class="profile-card">
+    <mat-card-header class="nametag">
+      <div mat-card-avatar class="profile-avatar">
+        <mat-icon class="profile-pic">person</mat-icon>
+      </div>
+      <div class="nametitle">
+        <mat-card-title class="profile-title">{{ user.username }}</mat-card-title>
+        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+    </div>
+    </mat-card-header>
+  
+    <mat-divider></mat-divider>
+  
+    <mat-card-content>
+      <div fxLayout="row wrap" fxLayoutGap="16px">
+        <div fxFlex="50" class="profile-item">
+          <strong>User ID:</strong>
+          <span>{{ user.userid }}</span>
+        </div>
+  
+        <div fxFlex="50" class="profile-item">
+          <strong>Uploaded:</strong>
+          <span>{{ user.uploaded.value }} {{ user.uploaded.unit }}</span>
+        </div>
+  
+        <div fxFlex="50" class="profile-item">
+          <strong>Downloaded:</strong>
+          <span>{{ user.downloaded.value }} {{ user.downloaded.unit }}</span>
+        </div>
+  
+        <div fxFlex="100" class="profile-item">
+          <strong>Registered:</strong>
+          <span>{{ formatRegistrationDate(user.registered) }}</span>
+        </div>
+      </div>
+    </mat-card-content>
+  
+    <mat-divider></mat-divider>
+  
+    <mat-card-actions align="end">
+      <button mat-fab extended color="primary">Edit Profile</button>
+      <button mat-fab extended color="warn">Delete Account</button>
+    </mat-card-actions>
+  </mat-card>
+  
