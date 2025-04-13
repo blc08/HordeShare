@@ -1,0 +1,45 @@
+    <div class="stats-overview">
+      <mat-card>
+        <mat-card-content>
+          <div class="stats-header">
+            <h2>Seeding Status Overview</h2>
+            <div class="seed-score" [ngClass]="getScoreClass(userStats.overallSeedScore)">
+              <div class="score-value">{{ userStats.overallSeedScore }}</div>
+              <div class="score-label">Seed Score</div>
+            </div>
+          </div>
+  
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-value">{{ userStats.totalTorrents }}</div>
+              <div class="stat-label">Total Torrents</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ userStats.activeTorrents }}</div>
+              <div class="stat-label">Active Seeding</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" [ngClass]="{'warning-text': userStats.hitAndRunWarnings > 0}">
+                {{ userStats.hitAndRunWarnings }}
+              </div>
+              <div class="stat-label">Hit'n'Run Warnings</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ userStats.completedTorrents }}</div>
+              <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">{{ userStats.averageSeedRatio | number:'1.2-2' }}</div>
+              <div class="stat-label">Avg Seed Ratio</div>
+            </div>
+          </div>
+          
+          <div class="seeding-info">
+            <p>
+              <mat-icon color="primary">info</mat-icon>
+              HordeShare requires maintaining a 1.0 ratio or seeding for the required time to avoid Hit'n'Run warnings.
+            </p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
