@@ -1,0 +1,137 @@
+/* app.component.scss */
+
+// Variables
+$primary-color: #6200ea;  // Deep purple
+$secondary-color: #3700b3;
+$accent-color: #03dac6;
+$text-light: #ffffff;
+$text-dark: #333333;
+$divider-color: rgba(0, 0, 0, 0.12);
+$sidenav-width: 250px;
+$toolbar-height: 64px;
+
+// Global styles
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+// Sidenav styles
+mat-sidenav {
+  width: $sidenav-width;
+  background-color: $text-light;
+  border-right: 1px solid $divider-color;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+// Toolbar/Header styles
+mat-toolbar {
+  background: linear-gradient(135deg, $primary-color, $secondary-color);
+  color: $text-light;
+  height: $toolbar-height;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  .menu-toggle-button {
+    display: none; // Hidden on desktop by default
+    margin-right: 16px;
+    color: $text-light;
+
+    @media (max-width: 960px) {
+      display: block; // Show on mobile
+    }
+  }
+
+  div {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-right: 24px;
+    white-space: nowrap;
+
+    @media (max-width: 960px) {
+      flex-grow: 1;
+      text-align: center;
+    }
+  }
+
+  nav {
+    flex-grow: 1;
+
+    ul {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      gap: 12px;
+      justify-content: flex-end;
+
+      @media (max-width: 960px) {
+        display: none; // Hide nav items on mobile, they'll be in the sidenav instead
+      }
+
+      a.mat-fab.mat-extended {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: background-color 0.2s ease;
+        height: 36px;
+        line-height: 36px;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &.active {
+          background-color: $accent-color;
+          color: $text-dark;
+        }
+
+        mat-icon {
+          margin-right: 4px;
+        }
+      }
+    }
+  }
+}
+
+mat-sidenav-content {
+  background-color: #f5f5f5;
+}
+
+mat-sidenav-container{
+  height: 100vh;
+}
+
+// Footer
+// app-footer {
+//   height: 50px;
+//   background-color: $secondary-color;
+//   color: $text-light;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   text-align: center;
+//   font-size: 0.9rem;
+// }
+
+// Mobile optimizations
+@media (max-width: 960px) {
+  mat-toolbar {
+    padding: 0 8px;
+  }
+}
+
+// Custom icons for navigation items
+.icon-torrents {
+  transform: rotate(45deg);
+}
+
+.icon-hitnrun {
+  transform: scale(0.9);
+}

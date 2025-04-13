@@ -1,0 +1,63 @@
+<div class="menu-header">
+  <div class="logo">
+    <h2>HordeShare</h2>
+  </div>
+  <button mat-icon-button (click)="sidenav.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="menu-content">
+  <mat-nav-list>
+    <a mat-list-item routerLink="/home" (click)="closeSidenav()">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </a>
+    <a mat-list-item routerLink="/torrents" (click)="closeSidenav()">
+      <mat-icon>cloud_download</mat-icon>
+      <span>Torrents</span>
+    </a>
+    <a mat-list-item routerLink="/hitnrun" (click)="closeSidenav()">
+      <mat-icon>speed</mat-icon>
+      <span>Hit'n'Run</span>
+    </a>
+    
+    <mat-divider></mat-divider>
+    
+    @if (isLoggedIn) {
+      <a mat-list-item routerLink="/profile" (click)="closeSidenav()">
+        <mat-icon>person</mat-icon>
+        <span>Profile</span>
+      </a>
+      <a mat-list-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </a>
+    } @else {
+      <a mat-list-item routerLink="/login" (click)="closeSidenav()">
+        <mat-icon>login</mat-icon>
+        <span>Login</span>
+      </a>
+      <a mat-list-item routerLink="/signup" (click)="closeSidenav()">
+        <mat-icon>person_add</mat-icon>
+        <span>Sign Up</span>
+      </a>
+    }
+  </mat-nav-list>
+</div>
+  <div class="menu-footer">
+    <div class="user-stats" *ngIf="isLoggedIn">
+      <div class="stat">
+        <mat-icon>arrow_upward</mat-icon>
+        <span>3.2 TB</span>
+      </div>
+      <div class="stat">
+        <mat-icon>arrow_downward</mat-icon>
+        <span>1.8 TB</span>
+      </div>
+      <div class="stat">
+        <mat-icon>star</mat-icon>
+        <span>Ratio: 1.78</span>
+      </div>
+    </div>
+  </div>
