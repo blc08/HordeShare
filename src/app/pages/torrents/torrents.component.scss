@@ -1,11 +1,9 @@
-// torrents.component.scss
 .torrents-container {
   padding: 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-// Filters and search section
 .filters-container {
   margin-bottom: 24px;
   display: flex;
@@ -70,14 +68,12 @@
   }
 }
 
-// Results info
 .results-info {
   margin-bottom: 16px;
   color: rgba(0, 0, 0, 0.6);
   font-size: 14px;
 }
 
-// No results
 .no-results {
   text-align: center;
   padding: 48px 0;
@@ -101,7 +97,6 @@
   }
 }
 
-// Torrent list
 mat-accordion {
   display: block;
 }
@@ -264,7 +259,6 @@ mat-expansion-panel {
   }
 }
 
-// Expanded content
 .torrent-details {
   display: grid;
   grid-template-columns: 1fr 300px;
