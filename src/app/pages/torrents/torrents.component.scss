@@ -1,0 +1,346 @@
+// torrents.component.scss
+.torrents-container {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Filters and search section
+.filters-container {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #f9f9f9;
+  padding: 16px;
+  border-radius: 8px;
+  
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  padding: 0 12px;
+  border: 1px solid #ddd;
+  flex: 1;
+  height: 48px;
+  
+  .search-icon {
+    color: rgba(0, 0, 0, 0.5);
+    margin-right: 8px;
+  }
+  
+  .search-input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    height: 100%;
+  }
+  
+  .clear-button {
+    height: 36px;
+    width: 36px;
+    line-height: 36px;
+    
+    mat-icon {
+      font-size: 18px;
+      height: 18px;
+      width: 18px;
+      line-height: 18px;
+    }
+  }
+}
+
+.filter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  
+  .category-select, .sort-select {
+    width: 180px;
+    margin-bottom: -1.25em;
+  }
+}
+
+// Results info
+.results-info {
+  margin-bottom: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 14px;
+}
+
+// No results
+.no-results {
+  text-align: center;
+  padding: 48px 0;
+  color: rgba(0, 0, 0, 0.6);
+  
+  mat-icon {
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+  
+  h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    margin-bottom: 24px;
+  }
+}
+
+// Torrent list
+mat-accordion {
+  display: block;
+}
+
+mat-expansion-panel {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+.torrent-row {
+  display: grid;
+  grid-template-columns: 100px minmax(150px, 3fr) 100px 120px 180px auto;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+  
+  @media (max-width: 1024px) {
+    grid-template-columns: 80px minmax(120px, 2fr) 80px 100px 140px auto;
+    gap: 12px;
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 60px minmax(100px, 1fr) 80px 80px auto;
+    gap: 8px;
+    
+    .date-uploader-cell {
+      display: none;
+    }
+  }
+}
+
+.category-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  .category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.05);
+    
+    mat-icon {
+      color: #555;
+    }
+  }
+  
+  .category-name {
+    font-size: 14px;
+    display: block;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+.name-cell {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.size-cell {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  
+  .size-icon {
+    font-size: 16px;
+    height: 16px;
+    width: 16px;
+    opacity: 0.7;
+  }
+}
+
+.health-cell {
+  .health-indicator {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    
+    .seeders, .leechers {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: white;
+      
+      mat-icon {
+        font-size: 14px;
+        height: 14px;
+        width: 14px;
+      }
+    }
+    
+    .seeders {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .leechers {
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.date-uploader-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  
+  .upload-date, .uploader {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    
+    mat-icon {
+      font-size: 14px;
+      height: 14px;
+      width: 14px;
+    }
+  }
+}
+
+.action-cell {
+  display: flex;
+  justify-content: flex-end;
+  
+  .download-button {
+    min-width: auto;
+    height: 36px;
+    position: relative;
+    overflow: hidden;
+    
+    .download-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+  }
+}
+
+// Expanded content
+.torrent-details {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.torrent-description {
+  h3 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.8);
+  }
+  
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.7);
+    line-height: 1.5;
+  }
+}
+
+.torrent-stats {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 8px;
+  
+  .stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    .stat-label {
+      color: rgba(0, 0, 0, 0.6);
+      font-size: 14px;
+    }
+    
+    .stat-value {
+      font-weight: 500;
+      font-size: 14px;
+      
+      &.seeders-value {
+        color: #4caf50;
+      }
+      
+      &.leechers-value {
+        color: #ff9800;
+      }
+      
+      .health-percentage {
+        margin-left: 8px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.torrent-actions {
+  grid-column: span 2;
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+  
+  @media (max-width: 768px) {
+    grid-column: span 1;
+  }
+  
+  .full-download-button {
+    padding: 0 24px;
+  }
+}

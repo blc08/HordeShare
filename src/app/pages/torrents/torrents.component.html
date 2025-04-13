@@ -1,0 +1,179 @@
+<div class="torrents-container">
+
+  <div class="filters-container">
+    <div class="search-box">
+      <mat-icon class="search-icon">search</mat-icon>
+      <input 
+        type="text" 
+        placeholder="Search by name or description..." 
+        [(ngModel)]="searchQuery"
+        (input)="applyFilters()"
+        class="search-input">
+      <button 
+        *ngIf="searchQuery" 
+        mat-icon-button 
+        class="clear-button" 
+        (click)="searchQuery = ''; applyFilters()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+    
+    <div class="filter-actions">
+      <mat-form-field appearance="outline" class="category-select">
+        <mat-label>Category</mat-label>
+        <mat-select [(ngModel)]="categoryFilter" (selectionChange)="applyFilters()">
+          <mat-option *ngFor="let category of categories" [value]="category.value">
+            {{ category.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline" class="sort-select">
+        <mat-label>Sort by</mat-label>
+        <mat-select (selectionChange)="onSortChange($event)">
+          <mat-option *ngFor="let option of sortOptions" [value]="option.name">
+            {{ option.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <button 
+        mat-stroked-button 
+        color="primary" 
+        (click)="clearFilters()"
+        *ngIf="searchQuery || categoryFilter !== 'all' || sortBy !== 'seeders' || sortDirection !== 'desc'">
+        <mat-icon>refresh</mat-icon> Reset Filters
+      </button>
+    </div>
+  </div>
+  
+  <div class="results-info" *ngIf="filteredTorrents.length > 0">
+    <span>Showing {{ filteredTorrents.length }} results</span>
+  </div>
+  
+  <div class="no-results" *ngIf="filteredTorrents.length === 0">
+    <mat-icon>search_off</mat-icon>
+    <h3>No torrents match your search</h3>
+    <p>Try adjusting your search terms or filters</p>
+    <button mat-raised-button color="primary" (click)="clearFilters()">
+      Clear All Filters
+    </button>
+  </div>
+
+  <!-- Torrent list -->
+  <mat-accordion multi *ngIf="filteredTorrents.length > 0">
+    <mat-expansion-panel *ngFor="let torrent of filteredTorrents">
+
+      <mat-expansion-panel-header [collapsedHeight]="'72px'" [expandedHeight]="'72px'">
+        <div class="torrent-row">
+          <div class="category-cell">
+            <div class="category-icon">
+              <mat-icon>{{ torrent.category.icon }}</mat-icon>
+            </div>
+            <span class="category-name">{{ torrent.category.name }}</span>
+          </div>
+          
+          <div class="name-cell" [matTooltip]="torrent.name">{{ torrent.name }}</div>
+          
+          <div class="size-cell">
+            <mat-icon class="size-icon">sd_card</mat-icon>
+            {{ torrent.size.value }} {{ torrent.size.unit }}
+          </div>
+
+          <div class="health-cell">
+            <div class="health-indicator" [ngStyle]="{'background-color': getHealthColor(calculateHealth(torrent.seeders, torrent.leechers))}">
+              <div class="seeders">
+                <mat-icon>arrow_upward</mat-icon> {{ torrent.seeders }}
+              </div>
+              <div class="leechers">
+                <mat-icon>arrow_downward</mat-icon> {{ torrent.leechers }}
+              </div>
+            </div>
+          </div>
+
+          <div class="date-uploader-cell">
+            <div class="upload-date">
+              <mat-icon>event</mat-icon>
+              {{ formatDate(torrent.upload_date) }}
+            </div>
+            <div class="uploader">
+              <mat-icon>person</mat-icon>
+              {{ torrent.uploader }}
+            </div>
+          </div>
+
+          <div class="action-cell">
+            <button 
+              mat-flat-button 
+              color="primary" 
+              class="download-button"
+              [disabled]="downloading[torrent.id]"
+              (click)="handleDownload(torrent, $event)"
+              matTooltip="Download this torrent">
+              <mat-icon *ngIf="!downloading[torrent.id]">download</mat-icon>
+              <mat-progress-bar 
+                *ngIf="downloading[torrent.id]" 
+                mode="indeterminate" 
+                class="download-progress">
+              </mat-progress-bar>
+              <span *ngIf="!downloading[torrent.id]">Download</span>
+              <span *ngIf="downloading[torrent.id]">Starting...</span>
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+
+      <div class="torrent-details">
+        <div class="torrent-description">
+          <h3>Description</h3>
+          <p>{{ torrent.description }}</p>
+        </div>
+        
+        <div class="torrent-stats">
+          <div class="stat-item">
+            <div class="stat-label">Seeders</div>
+            <div class="stat-value seeders-value">{{ torrent.seeders }}</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-label">Leechers</div>
+            <div class="stat-value leechers-value">{{ torrent.leechers }}</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-label">Size</div>
+            <div class="stat-value">{{ torrent.size.value }} {{ torrent.size.unit }}</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-label">Uploaded</div>
+            <div class="stat-value">{{ formatDate(torrent.upload_date) }}</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-label">Uploader</div>
+            <div class="stat-value">{{ torrent.uploader }}</div>
+          </div>
+          
+          <div class="stat-item">
+            <div class="stat-label">Health</div>
+            <div class="stat-value">
+              <mat-progress-bar 
+                mode="determinate" 
+                [value]="calculateHealth(torrent.seeders, torrent.leechers)"
+                [color]="calculateHealth(torrent.seeders, torrent.leechers) >= 75 ? 'primary' : 'warn'">
+              </mat-progress-bar>
+              <span class="health-percentage">{{ calculateHealth(torrent.seeders, torrent.leechers).toFixed(0) }}%</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="torrent-actions">
+          <button mat-flat-button color="primary" class="full-download-button" (click)="handleDownload(torrent, $event)">
+            <mat-icon>download</mat-icon> Download Torrent
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
