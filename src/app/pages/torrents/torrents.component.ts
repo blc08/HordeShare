@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { Torrent } from '../../interfaces/torrent';
 import { torrentsData_example } from './torrents_data_example';
+import { BytesConverterPipe } from "../../pipes/bytes-converter-pipe.pipe";
 
 @Component({
   selector: 'app-torrents',
@@ -34,8 +35,9 @@ import { torrentsData_example } from './torrents_data_example';
     MatProgressBarModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+    BytesConverterPipe
+]
 })
 export class TorrentsComponent implements OnInit {
   torrentsData: Torrent[] = torrentsData_example;

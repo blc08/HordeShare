@@ -2,7 +2,7 @@ export const torrentsData_example = [
     {
       category: { name: 'Movies', icon: 'movie' },
       name: 'Avengers: Endgame (2019) 2160p UHD BluRay x265',
-      size: { value: 50, unit: 'GB' },
+      size: { value: 50000000000 },
       seeders: 150,
       leechers: 75,
       downloaders: 225,
@@ -14,7 +14,7 @@ export const torrentsData_example = [
     {
       category: { name: 'TV Shows', icon: 'tv' },
       name: 'Stranger Things - Season 4 Complete [1080p x265]',
-      size: { value: 20, unit: 'GB' },
+      size: { value: 10000000000 },
       seeders: 100,
       leechers: 50,
       downloaders: 150,
@@ -26,7 +26,7 @@ export const torrentsData_example = [
     {
       category: { name: 'Music', icon: 'headset' },
       name: 'Taylor Swift - Complete Discography (2006-2024)',
-      size: { value: 15, unit: 'GB' },
+      size: { value: 15000000000 },
       seeders: 75,
       leechers: 30,
       downloaders: 105,
@@ -38,7 +38,7 @@ export const torrentsData_example = [
     {
       category: { name: 'eBook', icon: 'book' },
       name: 'George R.R. Martin - A Song of Ice and Fire Series',
-      size: { value: 500, unit: 'MB' },
+      size: { value: 500000000 },
       seeders: 45,
       leechers: 20,
       downloaders: 65,
@@ -50,7 +50,7 @@ export const torrentsData_example = [
     {
       category: { name: 'Software', icon: 'computer' },
       name: 'Adobe Creative Cloud 2024 Complete Suite',
-      size: { value: 25, unit: 'GB' },
+      size: { value: 25000000000 },
       seeders: 80,
       leechers: 40,
       downloaders: 120,
@@ -62,7 +62,7 @@ export const torrentsData_example = [
     {
       category: { name: 'Imageset', icon: 'image' },
       name: 'National Geographic Photography Collection (1980-2024)',
-      size: { value: 40, unit: 'GB' },
+      size: { value: 40000000000 },
       seeders: 90,
       leechers: 45,
       downloaders: 135,

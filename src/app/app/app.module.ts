@@ -34,4 +34,4 @@ import { MatTabsModule } from '@angular/material/tabs';
   exports: [
   ]
 })
-export class SignupModule { }
+export class SharedModule { }

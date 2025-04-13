@@ -1,6 +1,5 @@
 export interface Size {
     value: number;
-    unit: string;
   }
   
   export interface UploadDate {
