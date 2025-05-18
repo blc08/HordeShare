@@ -2,6 +2,8 @@
 
 Selected Project Task: **Torrent oldal**
 
+Hosted URL: https://hordeshare-5c7ad.web.app
+
 ## Required Information for Evaluation
 
 -   **Login Email:**  `test@gmail.com`
