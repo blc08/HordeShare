@@ -1,6 +1,24 @@
 {
-    "projects": {
-      "default": "hordeshare-5c7ad"
-    }
+  "projects": {
+    "default": "hordeshare-5c7ad"
+  },
+  "firestore": {
+    "database": "(default)",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "dist/hordeshare/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
-  
+}
