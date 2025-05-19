@@ -4,8 +4,8 @@
         <mat-icon class="profile-pic">person</mat-icon>
       </div>
       <div class="nametitle">
-        <mat-card-title class="profile-title">{{ user.username }}</mat-card-title>
-        <mat-card-subtitle>{{ user.email }}</mat-card-subtitle>
+        <mat-card-title class="profile-title">{{ user?.username }}</mat-card-title>
+        <mat-card-subtitle>{{ user?.email }}</mat-card-subtitle>
     </div>
     </mat-card-header>
   
@@ -15,22 +15,22 @@
       <div fxLayout="row wrap" fxLayoutGap="16px">
         <div fxFlex="50" class="profile-item">
           <strong>User ID:</strong>
-          <span>{{ user.userid }}</span>
+          <span>{{ user?.userid }}</span>
         </div>
   
         <div fxFlex="50" class="profile-item">
           <strong>Uploaded:</strong>
-          <span>{{ user.uploaded.value }} {{ user.uploaded.unit }}</span>
+          <span>{{ user?.uploaded?.value }} {{ user?.uploaded?.unit }}</span>
         </div>
   
         <div fxFlex="50" class="profile-item">
           <strong>Downloaded:</strong>
-          <span>{{ user.downloaded.value }} {{ user.downloaded.unit }}</span>
+          <span>{{ user?.downloaded?.value }} {{ user?.downloaded?.unit }}</span>
         </div>
   
         <div fxFlex="100" class="profile-item">
           <strong>Registered:</strong>
-          <span>{{ formatRegistrationDate(user.registered) }}</span>
+          <span>{{ formatRegistrationDate(user?.registered) }}</span>
         </div>
       </div>
     </mat-card-content>

@@ -1,79 +1,94 @@
-<div class="signup-container mat-elevation-z8">
-  <mat-card>
+<div class="signup-container">
+  <mat-card class="signup-card">
     <mat-card-header>
-      <mat-card-title>Create Account</mat-card-title>
-      <mat-card-subtitle>Please fill in your details to get started</mat-card-subtitle>
+      <mat-card-title>Regisztráció</mat-card-title>
+      <mat-card-subtitle>Töltsd ki az alábbi űrlapot a regisztrációhoz</mat-card-subtitle>
     </mat-card-header>
-
+    
     <mat-card-content>
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="form-row">
-          <mat-form-field appearance="outline">
-            <mat-label>First Name</mat-label>
-            <input matInput formControlName="firstName" placeholder="John">
-            <mat-error *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
-              {{ getErrorMessage('firstName') }}
-            </mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline">
-            <mat-label>Last Name</mat-label>
-            <input matInput formControlName="lastName" placeholder="Doe">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Vezetéknév</mat-label>
+            <input matInput formControlName="lastName" placeholder="Vezetéknév" autocomplete="family-name">
             <mat-error *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched">
               {{ getErrorMessage('lastName') }}
             </mat-error>
           </mat-form-field>
+          
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Keresztnév</mat-label>
+            <input matInput formControlName="firstName" placeholder="Keresztnév" autocomplete="given-name">
+            <mat-error *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched">
+              {{ getErrorMessage('firstName') }}
+            </mat-error>
+          </mat-form-field>
         </div>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" placeholder="example@domain.com" type="email">
-          <mat-icon matSuffix>email</mat-icon>
+        
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Felhasználónév</mat-label>
+          <input matInput formControlName="username" placeholder="Felhasználónév" autocomplete="username">
+          <mat-error *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+            {{ getErrorMessage('username') }}
+          </mat-error>
+          <mat-hint *ngIf="usernameCheckInProgress">Ellenőrzés...</mat-hint>
+          <mat-hint *ngIf="!usernameCheckInProgress && !usernameAvailable && !signupForm.get('username')?.hasError('minlength')">
+            Ez a felhasználónév már foglalt
+          </mat-hint>
+          <mat-hint *ngIf="!usernameCheckInProgress && usernameAvailable && signupForm.get('username')?.value && !signupForm.get('username')?.hasError('minlength')">
+            Ez a felhasználónév elérhető
+          </mat-hint>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>E-mail cím</mat-label>
+          <input matInput formControlName="email" placeholder="E-mail cím" autocomplete="email">
           <mat-error *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
             {{ getErrorMessage('email') }}
           </mat-error>
         </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'">
+        
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Jelszó</mat-label>
+          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" autocomplete="new-password">
           <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
-          <mat-hint align="start">Min 8 characters, including uppercase, lowercase, number and special character</mat-hint>
           <mat-error *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
             {{ getErrorMessage('password') }}
           </mat-error>
+          <mat-hint>A jelszónak legalább 8 karakter hosszúnak kell lennie és tartalmaznia kell nagybetűt, kisbetűt, számot és speciális karaktert.</mat-hint>
         </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Confirm Password</mat-label>
-          <input matInput formControlName="confirmPassword" [type]="hidePassword ? 'password' : 'text'">
+        
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Jelszó megerősítése</mat-label>
+          <input matInput formControlName="confirmPassword" [type]="hidePassword ? 'password' : 'text'" autocomplete="new-password">
           <mat-error *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched">
             {{ getErrorMessage('confirmPassword') }}
           </mat-error>
         </mat-form-field>
-
-        <div class="terms-checkbox">
+        
+        <div class="terms-container">
           <mat-checkbox formControlName="terms" color="primary">
-            I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
+            Elfogadom a felhasználási feltételeket és az adatvédelmi irányelveket
           </mat-checkbox>
-          <mat-error *ngIf="signupForm.get('terms')?.invalid && signupForm.get('terms')?.touched">
-            You must accept the terms to continue
+          <mat-error *ngIf="signupForm.get('terms')?.invalid && signupForm.get('terms')?.touched" class="terms-error">
+            A regisztrációhoz el kell fogadnod a feltételeket
           </mat-error>
         </div>
-
-        <div class="form-actions">
-          <button mat-flat-button color="primary" type="submit" [disabled]="isLoading" class="full-width">
-            <mat-spinner *ngIf="isLoading" diameter="20" class="spinner"></mat-spinner>
-            <span *ngIf="!isLoading">Sign Up</span>
+        
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="signupForm.invalid || isLoading" class="submit-button">
+            <mat-spinner *ngIf="isLoading" [diameter]="24" class="spinner"></mat-spinner>
+            <span *ngIf="!isLoading">Regisztráció</span>
           </button>
-        </div>
-
-        <div class="login-link">
-          Already have an account? <a routerLink="/login">Log in</a>
         </div>
       </form>
     </mat-card-content>
+    
+    <mat-card-actions class="login-link">
+      <span>Van már fiókod?</span>
+      <a routerLink="/login" mat-button color="primary">Bejelentkezés</a>
+    </mat-card-actions>
   </mat-card>
 </div>

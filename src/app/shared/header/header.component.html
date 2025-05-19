@@ -2,18 +2,18 @@
   <div class="header-content">
     <div class="user-profile">
       <div class="user-info">
-        <span class="username">{{ user.username }}</span>
-        <span class="rank">{{ user.rank }}</span>
+        <span class="username">{{ user?.username }}</span>
+        <span class="rank">{{ user?.rank }}</span>
       </div>
       
       <div class="user-stats">
         <div class="stat">
           <mat-icon>arrow_upward</mat-icon>
-          <span>{{ user.uploaded.value }} {{ user.uploaded.unit }}</span>
+          <span>{{ user?.uploaded?.value }} {{ user?.uploaded?.unit }}</span>
         </div>
         <div class="stat">
           <mat-icon>arrow_downward</mat-icon>
-          <span>{{ user.downloaded.value }} {{ user.downloaded.unit }}</span>
+          <span>{{ user?.downloaded?.value }} {{ user?.downloaded?.unit }}</span>
         </div>
         <div class="stat">
           <mat-icon>star</mat-icon>
